@@ -1,0 +1,52 @@
+/* --- Polished Golden Wood Theme (matching uploaded image) --- */
+
+body {
+  background: radial-gradient(circle at center, #b47b3b 0%, #7a4a1e 100%);
+  color: #fef9f0;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+}
+
+/* Stop control panels (side jambs) */
+.stop-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  padding: 20px;
+  background: linear-gradient(60deg, #c68a42, #b3732d, #a26119);
+  border: 3px solid #5a3413;
+  border-radius: 12px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.5),
+              0 4px 12px rgba(0,0,0,0.5);
+}
+
+.stop {
+  background: radial-gradient(circle, #603813, #2f1a0c);
+  color: white;
+  border: 2px solid #c49b66;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  font-family: 'Georgia', serif;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.stop.active {
+  background: radial-gradient(circle, #ffeb91, #b8860b);
+  color: black;
+  box-shadow: 0 0 15px #ffd700;
+}
+/* Optional subtle highlight ring (to simulate a bevel) */
+.stop::before {
+  content: "";
+  position: absolute;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 6px rgba(0,0,0,0.3) inset;
+  pointer-events: none;
+}
