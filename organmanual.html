@@ -2,43 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Organ Manuals</title>
   <link rel="stylesheet" href="organmanual.css">
 </head>
 <body>
-  <div id="manuals-container">
-    <h2>Organ Manuals</h2>
+  <h1>Virtual Pipe Organ – Manuals</h1>
 
-    <div class="manual" id="great">
-      <h3>Great Manual</h3>
-      <div class="keyboard" id="great-keyboard"></div>
-    </div>
-
-    <div class="manual" id="swell">
-      <h3>Swell Manual</h3>
-      <div class="keyboard" id="swell-keyboard"></div>
-    </div>
-
-    <div class="manual" id="choir">
-      <h3>Choir Manual</h3>
-      <div class="keyboard" id="choir-keyboard"></div>
-    </div>
-
-    <div class="manual" id="pedal">
-      <h3>Pedal</h3>
-      <div class="keyboard" id="pedal-keyboard"></div>
-    </div>
-
-    <h3>Couplers</h3>
-    <div id="couplers">
-      <label><input type="checkbox" id="swell-to-great"> Swell → Great</label>
-      <label><input type="checkbox" id="choir-to-great"> Choir → Great</label>
-      <label><input type="checkbox" id="great-to-pedal"> Great → Pedal</label>
-      <label><input type="checkbox" id="swell-to-pedal"> Swell → Pedal</label>
-    </div>
-
-    <a href="index.html" id="back-link">← Back to Organ</a>
+  <div class="manual" id="great">
+    <h2>Great Manual</h2>
+    <div class="keyboard"></div>
   </div>
+
+  <div class="manual" id="swell">
+    <h2>Swell Manual</h2>
+    <div class="keyboard"></div>
+  </div>
+
+  <div class="manual" id="pedal">
+    <h2>Pedalboard</h2>
+    <div class="keyboard pedal"></div>
+  </div>
+
+  <a href="index.html" class="back">Back to Organ</a>
 
   <script src="organmanual.js"></script>
 </body>
