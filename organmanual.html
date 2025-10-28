@@ -2,38 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Manual Settings</title>
-  <link rel="stylesheet" href="organmanual.css">
+  <title>Organ Manuals</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="manual-settings">
-    <h3>Manual Configuration</h3>
+  <div id="manuals-container">
+    <h2>Organ Manuals</h2>
 
-    <p>Select which manuals are active and rename them:</p>
-
-    <div class="manual-item">
-      <input type="checkbox" id="great-active" checked>
-      <input type="text" id="great-name" value="Great Manual">
+    <div class="manual" id="great">
+      <h3>Great Manual</h3>
+      <div class="keyboard" id="great-keyboard"></div>
     </div>
 
-    <div class="manual-item">
-      <input type="checkbox" id="swell-active" checked>
-      <input type="text" id="swell-name" value="Swell Manual">
+    <div class="manual" id="swell">
+      <h3>Swell Manual</h3>
+      <div class="keyboard" id="swell-keyboard"></div>
     </div>
 
-    <div class="manual-item">
-      <input type="checkbox" id="choir-active">
-      <input type="text" id="choir-name" value="Choir Manual">
+    <div class="manual" id="choir">
+      <h3>Choir Manual</h3>
+      <div class="keyboard" id="choir-keyboard"></div>
     </div>
 
-    <div class="manual-item">
-      <input type="checkbox" id="pedal-active" checked>
-      <input type="text" id="pedal-name" value="Pedal">
+    <div class="manual" id="pedal">
+      <h3>Pedal</h3>
+      <div class="keyboard" id="pedal-keyboard"></div>
+    </div>
+
+    <h3>Couplers</h3>
+    <div id="couplers">
+      <label><input type="checkbox" id="swell-to-great"> Swell → Great</label>
+      <label><input type="checkbox" id="choir-to-great"> Choir → Great</label>
+      <label><input type="checkbox" id="great-to-pedal"> Great → Pedal</label>
+      <label><input type="checkbox" id="swell-to-pedal"> Swell → Pedal</label>
     </div>
 
     <a href="index.html" id="back-link">← Back to Organ</a>
   </div>
 
-  <script src="organmanual.js"></script>
+  <script src="manuals.js"></script>
 </body>
 </html>
