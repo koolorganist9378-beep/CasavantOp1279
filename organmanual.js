@@ -1,46 +1,31 @@
-// --- Generate Keyboard Layouts ---
-const whiteKeys = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-const blackKeyOffsets = [1, 2, 4, 5, 6]; // For C#, D#, F#, G#, A#
+document.addEventListener("DOMContentLoaded", () => {
+  const whiteOrder = [0, 2, 4, 5, 7, 9, 11];
+  const blackOrder = [1, 3, 6, 8, 10];
 
-function createKeyboard(containerId, numOctaves = 5) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
+  document.querySelectorAll(".keyboard").forEach(kb => {
+    const isPedal = kb.classList.contains("pedal");
+    const numKeys = isPedal ? 32 : 61;
+    const startMidi = isPedal ? 36 : 36; // adjust later if needed
 
-  for (let i = 0; i < numOctaves; i++) {
-    whiteKeys.forEach((note, index) => {
-      const key = document.createElement('div');
-      key.classList.add('key');
-      key.dataset.note = note + (i + 1);
-      container.appendChild(key);
-
-      if (!['E', 'B'].includes(note)) {
-        const black = document.createElement('div');
-        black.classList.add('key', 'black');
-        black.dataset.note = note + '#' + (i + 1);
-        black.style.left = `${(index * 16) + 12 + (i * 7 * 16)}px`;
-        container.appendChild(black);
+    for (let i = 0; i < numKeys; i++) {
+      const note = (i + startMidi) % 12;
+      if (whiteOrder.includes(note)) {
+        const white = document.createElement("div");
+        white.classList.add("white-key");
+        kb.appendChild(white);
       }
-    });
-  }
-}
+    }
 
-// Create manuals visually
-['great', 'swell', 'choir', 'pedal'].forEach(m => {
-  createKeyboard(`${m}-keyboard`, m === 'pedal' ? 2 : 5);
-});
-
-// --- Couplers ---
-const couplers = ['swell-to-great', 'choir-to-great', 'great-to-pedal', 'swell-to-pedal'];
-
-// Load saved coupler settings
-window.addEventListener('load', () => {
-  couplers.forEach(id => {
-    const checkbox = document.getElementById(id);
-    const saved = localStorage.getItem(id);
-    if (saved) checkbox.checked = saved === 'true';
-
-    checkbox.addEventListener('change', (e) => {
-      localStorage.setItem(id, e.target.checked);
+    // Add black keys visually positioned between white keys
+    const whiteKeys = kb.querySelectorAll(".white-key");
+    whiteKeys.forEach((w, i) => {
+      const note = (i + startMidi) % 12;
+      if ([0,1,3,5,6,8,10].includes(note)) {
+        const black = document.createElement("div");
+        black.classList.add("black-key");
+        black.style.left = `${w.offsetLeft + 15}px`;
+        kb.appendChild(black);
+      }
     });
   });
 });
