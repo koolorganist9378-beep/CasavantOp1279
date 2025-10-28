@@ -4,3 +4,40 @@ body {
   font-family: "Segoe UI", sans-serif;
   text-align: center;
 }
+#manual-settings {
+  background: #3b2a1a;
+  border: 2px solid #b98c56;
+  border-radius: 12px;
+  color: #f5deb3;
+  padding: 20px;
+  width: 320px;
+  font-family: "Georgia", serif;
+}
+
+.manual-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.manual-item input[type="text"] {
+  flex: 1;
+  margin-left: 10px;
+  background: #60422b;
+  border: 1px solid #b98c56;
+  color: #fff;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+#back-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #ffd98a;
+  text-decoration: none;
+}
+
+#back-link:hover {
+  text-decoration: underline;
+}
