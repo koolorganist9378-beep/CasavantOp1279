@@ -1,0 +1,114 @@
+body {
+  background: #111;
+  color: #eee;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  padding: 30px;
+  margin: 0;
+}
+
+h1 {
+  margin-bottom: 25px;
+}
+
+p{
+  font-weight:300;
+}
+
+.preset-container {
+  background: #1c1c1c;
+  border-radius: 12px;
+  padding: 25px;
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: inset 0 0 10px #000;
+}
+
+.control-row {
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* SET AND CANCEL Buttons */
+.control-btn {
+  width: 120px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #777;
+  background: radial-gradient(circle at 30% 30%, #444, #222);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: inset 0 0 5px #000, 0 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+#set-btn.active {
+  background: radial-gradient(circle at 30% 30%, #81d4fa, #0288d1);
+  border-color: #4fc3f7;
+  box-shadow: 0 0 20px #4fc3f7, 0 0 40px #4fc3f7;
+}
+
+#cancel-btn:active {
+  background: radial-gradient(circle at 30% 30%, #ef5350, #b71c1c);
+  box-shadow: 0 0 20px #ef5350, 0 0 40px #ef5350;
+}
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 15px;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.preset-btn {
+  background: radial-gradient(circle at 30% 30%, #444, #222);
+  color: white;
+  border: 2px solid #666;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: inset 0 0 5px #000, 0 3px 6px rgba(0,0,0,0.6);
+}
+
+.preset-btn.active {
+  background: radial-gradient(circle at 30% 30%, #fff176, #fbc02d);
+  color: black;
+  border-color: #ffeb3b;
+  box-shadow: 0 0 15px #ffeb3b, 0 0 30px #ffeb3b;
+  transform: scale(1.05);
+}
+
+/* when saved but not active */
+.preset-btn.saved {
+  border-color: #888;
+  color: #aaa;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.actions button {
+  background: #333;
+  color: white;
+  border: 1px solid #666;
+  border-radius: 6px;
+  padding: 10px 18px;
+  margin: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.actions button:hover {
+  background: #555;
+}

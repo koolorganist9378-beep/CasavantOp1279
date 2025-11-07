@@ -1,78 +1,38 @@
-let midiAccess = null;
-let selectedInput = null;
-let selectedManual = localStorage.getItem('selectedManual') || 'great';
-let savedInputId = localStorage.getItem('selectedInputId');
+function createKeyboard(containerId, octaves = 3) {
+  const keyboard = document.getElementById(containerId);
+  const whiteNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+  const blackPositions = [0.7, 1.7, 3.2, 4.2, 5.2]; // relative white key positions per octave
+  const whiteKeyWidth = 40;
 
-// Request MIDI access
-if (navigator.requestMIDIAccess) {
-  navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
-} else {
-  alert("Your browser does not support Web MIDI API.");
-}
-
-function onMIDISuccess(access) {
-  midiAccess = access;
-  const inputSelect = document.getElementById('midiInputSelect');
-  inputSelect.innerHTML = '';
-
-  // Populate MIDI devices
-  for (let input of midiAccess.inputs.values()) {
-    const option = document.createElement('option');
-    option.value = input.id;
-    option.textContent = input.name;
-    inputSelect.appendChild(option);
+  // Create white keys
+  for (let o = 0; o < octaves; o++) {
+    whiteNotes.forEach(note => {
+      const w = document.createElement('div');
+      w.classList.add('key-white');
+      w.dataset.note = `${note}${o + 2}`;
+      keyboard.appendChild(w);
+    });
   }
 
-  // Restore saved device if available
-  if (savedInputId && midiAccess.inputs.has(savedInputId)) {
-    inputSelect.value = savedInputId;
-    selectedInput = midiAccess.inputs.get(savedInputId);
-    selectedInput.onmidimessage = handleMIDIMessage;
-  } else if (midiAccess.inputs.size > 0) {
-    selectedInput = midiAccess.inputs.values().next().value;
-    inputSelect.value = selectedInput.id;
-    selectedInput.onmidimessage = handleMIDIMessage;
-  }
-
-  // Save new device on change
-  inputSelect.addEventListener('change', () => {
-    const id = inputSelect.value;
-    selectedInput = midiAccess.inputs.get(id);
-    selectedInput.onmidimessage = handleMIDIMessage;
-    localStorage.setItem('selectedInputId', id);
-  });
-}
-
-function onMIDIFailure() {
-  console.error('Failed to access MIDI devices.');
-}
-
-// Handle manual selector
-const manualSelect = document.getElementById('manualSelect');
-manualSelect.value = selectedManual;
-
-manualSelect.addEventListener('change', (e) => {
-  selectedManual = e.target.value;
-  localStorage.setItem('selectedManual', selectedManual);
-  console.log(`MIDI assigned to ${selectedManual} manual`);
-});
-
-// Handle incoming MIDI
-function handleMIDIMessage(event) {
-  const [command, note, velocity] = event.data;
-
-  if (command >= 144 && command < 160 && velocity > 0) {
-    playNoteOnManual(note, velocity, selectedManual);
-  } else if ((command >= 128 && command < 144) || (command >= 144 && velocity === 0)) {
-    stopNoteOnManual(note, selectedManual);
+  // Create black keys
+  for (let o = 0; o < octaves; o++) {
+    blackPositions.forEach((pos, i) => {
+      const b = document.createElement('div');
+      b.classList.add('key-black');
+      b.dataset.note = `${['C#','D#','F#','G#','A#'][i]}${o + 2}`;
+      b.style.left = `${(o * 7 + pos) * whiteKeyWidth}px`;
+      keyboard.appendChild(b);
+    });
   }
 }
 
-// Placeholder sound functions
-function playNoteOnManual(note, velocity, manual) {
-  console.log(`Play note ${note} (vel ${velocity}) on ${manual}`);
-}
+// Create manual
+createKeyboard('manual1', 4);
 
-function stopNoteOnManual(note, manual) {
-  console.log(`Stop note ${note} on ${manual}`);
+// Create pedalboard (simplified)
+const pedal = document.getElementById('pedal');
+for (let i = 0; i < 30; i++) {
+  const key = document.createElement('div');
+  key.classList.add('key-white');
+  pedal.appendChild(key);
 }

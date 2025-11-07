@@ -1,0 +1,49 @@
+body {
+  background: #583e38;
+  color: white;
+}
+
+.couplers-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.coupler-group {
+  background: #333;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+  width: 250px;
+}
+
+.coupler-group h2 {
+  margin-bottom: 15px;
+  color: #ffcc66;
+}
+
+.coupler-btn {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.coupler-btn:hover {
+  background: #666;
+}
+
+.coupler-btn.active {
+  background: #00b894;
+  color: black;
+  font-weight: bold;
+}
