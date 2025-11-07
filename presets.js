@@ -2,10 +2,18 @@ let savedPresets = JSON.parse(localStorage.getItem("organPresets")) || {};
 const presetButtons = document.querySelectorAll(".preset-btn");
 const setBtn = document.getElementById("set-btn");
 const cancelBtn = document.getElementById("cancel-btn");
+const clearBtn = document.getElementById("clear-btn");
 
-// Restore Set state
+// Restore SET mode state
 let setMode = localStorage.getItem("setMode") === "true";
 setBtn.classList.toggle("active", setMode);
+
+// Restore currently active preset (if any)
+let currentPreset = localStorage.getItem("currentPreset");
+if (currentPreset) {
+  const activeBtn = document.querySelector(`[data-preset="${currentPreset}"]`);
+  if (activeBtn) activeBtn.classList.add("active");
+}
 
 // Toggle SET mode
 setBtn.addEventListener("click", () => {
@@ -14,9 +22,9 @@ setBtn.addEventListener("click", () => {
   setBtn.classList.toggle("active", setMode);
 });
 
-// CANCEL — clear everything visually and logically
+// CANCEL — turn off everything
 cancelBtn.addEventListener("click", () => {
-  // Clear active stops/couplers
+  // Clear stop and coupler states
   localStorage.setItem("stopStates", JSON.stringify({}));
   localStorage.setItem("couplerStates", JSON.stringify({}));
 
@@ -25,19 +33,20 @@ cancelBtn.addEventListener("click", () => {
   localStorage.setItem("setMode", "false");
   setBtn.classList.remove("active");
 
-  // Turn off ALL preset pistons visually
+  // Unlight all preset pistons
   presetButtons.forEach(b => b.classList.remove("active"));
+  localStorage.removeItem("currentPreset"); // reset current preset indicator
 
-  // Optional feedback flash (visual realism)
+  // Optional cancel flash
   cancelBtn.classList.add("flash");
   setTimeout(() => cancelBtn.classList.remove("flash"), 300);
+
+  alert("🛑 General Cancel: All stops, couplers, and pistons are OFF.");
 });
 
-// Handle preset save/recall
+// Handle presets (save and recall)
 presetButtons.forEach(btn => {
   const num = btn.dataset.preset;
-
-  if (savedPresets[num]) btn.classList.add("active");
 
   btn.addEventListener("click", () => {
     if (setMode) {
@@ -47,20 +56,22 @@ presetButtons.forEach(btn => {
       savedPresets[num] = { stopStates, couplerStates };
       localStorage.setItem("organPresets", JSON.stringify(savedPresets));
 
-      presetButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
       alert(`💾 Preset ${num} saved!`);
     } else {
       // Recall preset
-      presetButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
       const preset = savedPresets[num];
+      if (!preset) return alert(`No data saved for Preset ${num}.`);
 
+      // Apply preset
       localStorage.setItem("stopStates", JSON.stringify(preset.stopStates || {}));
       localStorage.setItem("couplerStates", JSON.stringify(preset.couplerStates || {}));
+
+      // Visually update buttons
+      presetButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      localStorage.setItem("currentPreset", num);
+
+      alert(`🎹 Preset ${num} loaded!`);
     }
   });
 });
-
