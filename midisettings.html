@@ -19,6 +19,53 @@
       <option value="pedal">Pedal</option>
     </select>
 
+    <h2>MIDI Input Type</h2>
+<div id="midi-type-select">
+  <label>
+    <input type="radio" name="midiType" value="piano" checked>
+    Digital Piano / Keyboard
+  </label>
+  <label>
+    <input type="radio" name="midiType" value="organ">
+    Organ Console with MIDI OUT
+  </label>
+</div>
+
+<div id="organ-settings" class="hidden">
+  <h3>Organ MIDI Channel Mapping</h3>
+  <p>Assign incoming organ channels to manuals:</p>
+  <div class="midi-map">
+    <label>Great Manual:
+      <select id="organ-great">
+        <option value="1">Channel 1</option>
+        <option value="2">Channel 2</option>
+        <option value="3">Channel 3</option>
+        <option value="4">Channel 4</option>
+        <option value="5">Channel 5</option>
+      </select>
+    </label>
+
+    <label>Swell Manual:
+      <select id="organ-swell">
+        <option value="1">Channel 1</option>
+        <option value="2">Channel 2</option>
+        <option value="3" selected>Channel 3</option>
+        <option value="4">Channel 4</option>
+      </select>
+    </label>
+
+    <label>Pedalboard:
+      <select id="organ-pedal">
+        <option value="1">Channel 1</option>
+        <option value="2">Channel 2</option>
+        <option value="3">Channel 3</option>
+        <option value="4" selected>Channel 4</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+
     <a href="index.html" id="back-link">← Back to Organ</a>
   </div>
 

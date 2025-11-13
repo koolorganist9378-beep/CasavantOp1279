@@ -36,3 +36,16 @@ body {
 #back-link:hover {
   text-decoration: underline;
 }
+
+.hidden {
+  display: none;
+}
+
+#midi-type-select {
+  margin: 20px 0;
+}
+
+.midi-map label {
+  display: block;
+  margin: 8px 0;
+}
