@@ -38,6 +38,31 @@ for (let i = 0; i < 30; i++) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("midi-startup-modal");
+  const organSettings = document.getElementById("organ-settings");
+  const manualAssignment = document.getElementById("manual-assignment");
+
+  // Hide all settings initially
+  organSettings.classList.add("hidden");
+  manualAssignment.classList.add("hidden");
+
+  // Button actions in modal
+  document.getElementById("choose-piano").addEventListener("click", () => {
+    modal.style.display = "none";
+    manualAssignment.classList.remove("hidden");
+  });
+
+  document.getElementById("choose-organ").addEventListener("click", () => {
+    modal.style.display = "none";
+    organSettings.classList.remove("hidden");
+    manualAssignment.classList.remove("hidden");
+  });
+
+  // ... your existing MIDI detection and channel logic remains here ...
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
   const midiTypeRadios = document.querySelectorAll("input[name='midiType']");
   const organSettings = document.getElementById("organ-settings");
   const manualAssignment = document.getElementById("manual-assignment");
