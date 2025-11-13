@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navigator.requestMIDIAccess().then(midiAccess => {
       const inputs = Array.from(midiAccess.inputs.values());
       const selects = [
+        document.getElementById("piano-choir"),
         document.getElementById("piano-great"),
         document.getElementById("piano-swell"),
         document.getElementById("piano-pedal"),
