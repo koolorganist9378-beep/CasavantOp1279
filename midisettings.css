@@ -45,7 +45,8 @@ body {
   margin: 20px 0;
 }
 
-.midi-map label {
+.midi-map label, #manual-map label {
   display: block;
   margin: 8px 0;
 }
+

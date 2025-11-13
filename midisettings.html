@@ -31,17 +31,45 @@
   </label>
 </div>
 
+<!-- Manual assignment (used for both modes) -->
+<div id="manual-assignment">
+  <h3>Manual Assignment</h3>
+  <p>Assign detected MIDI devices to manuals:</p>
+  <div id="manual-map">
+    <label>Great Manual:
+      <select id="piano-great"></select>
+    </label>
+
+    <label>Swell Manual:
+      <select id="piano-swell"></select>
+    </label>
+
+    <label>Pedalboard:
+      <select id="piano-pedal"></select>
+    </label>
+  </div>
+</div>
+
+<!-- Organ channel section (only visible in organ mode) -->
 <div id="organ-settings" class="hidden">
   <h3>Organ MIDI Channel Mapping</h3>
-  <p>Assign incoming organ channels to manuals:</p>
+  <p>Map incoming channels to manuals:</p>
   <div class="midi-map">
+     <label>Choir Manual:
+      <select id="organ-choir">
+        <option value="1">Channel 1</option>
+        <option value="2" selected>Channel 2</option>
+        <option value="3">Channel 3</option>
+        <option value="4">Channel 4</option>
+      </select>
+    </label>
+
     <label>Great Manual:
       <select id="organ-great">
-        <option value="1">Channel 1</option>
+        <option value="1" selected>Channel 1</option>
         <option value="2">Channel 2</option>
         <option value="3">Channel 3</option>
         <option value="4">Channel 4</option>
-        <option value="5">Channel 5</option>
       </select>
     </label>
 
@@ -64,6 +92,7 @@
     </label>
   </div>
 </div>
+
 
 
     <a href="index.html" id="back-link">← Back to Organ</a>

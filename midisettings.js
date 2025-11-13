@@ -40,18 +40,42 @@ for (let i = 0; i < 30; i++) {
 document.addEventListener("DOMContentLoaded", () => {
   const midiTypeRadios = document.querySelectorAll("input[name='midiType']");
   const organSettings = document.getElementById("organ-settings");
+  const manualAssignment = document.getElementById("manual-assignment");
 
+  // Detect MIDI inputs (for manual assignment)
+  if (navigator.requestMIDIAccess) {
+    navigator.requestMIDIAccess().then(midiAccess => {
+      const inputs = Array.from(midiAccess.inputs.values());
+      const selects = [
+        document.getElementById("piano-great"),
+        document.getElementById("piano-swell"),
+        document.getElementById("piano-pedal"),
+      ];
+      inputs.forEach(input => {
+        selects.forEach(sel => {
+          const option = document.createElement("option");
+          option.value = input.id;
+          option.textContent = input.name;
+          sel.appendChild(option);
+        });
+      });
+    });
+  }
+
+  // Show/Hide sections based on mode
   midiTypeRadios.forEach(radio => {
     radio.addEventListener("change", () => {
       if (radio.value === "organ" && radio.checked) {
         organSettings.classList.remove("hidden");
+        manualAssignment.classList.remove("hidden");
       } else if (radio.value === "piano" && radio.checked) {
         organSettings.classList.add("hidden");
+        manualAssignment.classList.remove("hidden");
       }
     });
   });
 
-  // MIDI channel mapping logic
+  // Organ MIDI channel mapping
   let organChannelMap = {
     great: 1,
     swell: 3,
@@ -64,36 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("organ-swell").addEventListener("change", e => {
     organChannelMap.swell = parseInt(e.target.value);
   });
+  document.getElementById("organ-choir").addEventListener("change", e => {
+    organChannelMap.choir = parseInt(e.target.value);
+  });
   document.getElementById("organ-pedal").addEventListener("change", e => {
     organChannelMap.pedal = parseInt(e.target.value);
-  });
-
-  // Hook into existing MIDI input
-  if (navigator.requestMIDIAccess) {
-    navigator.requestMIDIAccess().then(midiAccess => {
-      for (let input of midiAccess.inputs.values()) {
-        input.onmidimessage = msg => {
-          const [status, note, velocity] = msg.data;
-          const channel = status & 0x0f; // MIDI channels 0–15
-          const type = status & 0xf0;
-
-          // Find which manual this belongs to
-          if (type === 0x90 && velocity > 0) {
-            if (channel + 1 === organChannelMap.great) {
-              console.log(`Great note ON: ${note}`);
-            } else if (channel + 1 === organChannelMap.swell) {
-              console.log(`Swell note ON: ${note}`);
-            } else if (channel + 1 === organChannelMap.pedal) {
-              console.log(`Pedal note ON: ${note}`);
-            }
-          } else if (type === 0x80 || (type === 0x90 && velocity === 0)) {
-            // Note off
-            if (channel + 1 === organChannelMap.great) {
-              console.log(`Great note OFF: ${note}`);
-            }
-          }
-        };
-      }
-    });
-  }
+  });  
 });
