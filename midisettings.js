@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Organ MIDI channel mapping
   let organChannelMap = {
+    choir: 2,
     great: 1,
     swell: 3,
     pedal: 4
@@ -93,5 +94,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   document.getElementById("organ-pedal").addEventListener("change", e => {
     organChannelMap.pedal = parseInt(e.target.value);
-  });  
+  });
 });
