@@ -67,7 +67,7 @@ function noteOff(midiNote) {
 
     setTimeout(() => {
         source.stop();
-    }, 60);
+    }, 61);
 
     activeVoices.delete(midiNote);
 }
