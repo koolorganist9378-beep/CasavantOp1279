@@ -15,6 +15,28 @@
 
         <button id="playBtn" disabled>Play</button>
 
+        <h2>Stops</h2>
+
+        <div id="stopPanel">
+            <label><input type="checkbox" class="stop" value="principal8"> Principal 8'</label><br>
+            <label><input type="checkbox" class="stop" value="gedackt8"> Gedackt 8'</label><br>
+            <label><input type="checkbox" class="stop" value="octave4"> Octave 4'</label><br>
+            <label><input type="checkbox" class="stop" value="flute4"> Flute 4'</label><br>
+            <label><input type="checkbox" class="stop" value="mixture"> Mixture IV</label><br>
+        </div>
+
+        <h2>Presets</h2>
+
+        <select id="presetSelect">
+            <option value="">-- Select Preset --</option>
+            <option value="full">Full Organ</option>
+            <option value="soft">Soft Registration</option>
+            <option value="principalChorus">Principal Chorus</option>
+        </select>
+
+        <button id="applyPresetBtn">Apply Preset</button>
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/opensheetmusicdisplay@1.6.0/build/opensheetmusicdisplay.min.js"></script>
         <script src="self-player.js"></script>
