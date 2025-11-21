@@ -66,3 +66,14 @@ async function getMIDIOutput() {
     access.outputs.forEach(o => output = o);
     return output;
 }
+
+function applyPreset(presetName) {
+
+    const selectedStops = presets[presetName];
+
+    // Save to localStorage
+    localStorage.setItem("activeStops", JSON.stringify(selectedStops));
+
+    // Optional: redirect to stopjamb
+    window.location.href = "stopjamb.html";
+}
