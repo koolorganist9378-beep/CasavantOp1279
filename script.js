@@ -76,6 +76,7 @@ function noteOff(midiNote) {
 function handleMIDIMessage(message) {
     const [status, note, velocity] = message.data;
     const type = status & 0xf0;
+    midiInput.onmidimessage = handleMIDIMessage;
 
     if (type === 0x90 && velocity > 0) {  
         noteOn(note, velocity);
