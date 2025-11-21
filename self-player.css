@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+#score {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+}
